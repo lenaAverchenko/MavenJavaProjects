@@ -8,33 +8,33 @@ import java.util.Arrays;
 
 class ArraysUtilTest {
     private ArraysUtil arraysUtil = new ArraysUtil();
-    private Integer[] array1 = {1, 2, 5, 5, 8, 9, 7, 10};
-    private Integer[] array2 = {1, 0, 6, 15, 6, 4, 7, 0};
+    private int[] array1 = {1, 2, 5, 5, 8, 9, 7, 10};
+    private int[] array2 = {1, 0, 6, 15, 6, 4, 7, 0};
 
     @Test
     void getTheCommonNumbers() {
-        Integer[] expected = {1,7};
-        Integer[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(array1,array2);
-        Assertions.assertArrayEquals(expected,resultOfTheMethod);
+        int[] expected = {1, 7};
+        int[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(array1, array2);
+        Assertions.assertArrayEquals(expected, resultOfTheMethod);
     }
 
     @Test
     void getTheCommonNumbersIfFirstArrayIsEmpty() {
-        Integer[] expected = {};
-        Integer[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(new Integer[0],array2);
-        Assertions.assertArrayEquals(expected,resultOfTheMethod);
+        int[] expected = {};
+        int[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(new int[0], array2);
+        Assertions.assertArrayEquals(expected, resultOfTheMethod);
     }
 
     @Test
     void getTheCommonNumbersIfSecondArrayIsEmpty() {
-        Integer[] expected = {};
-        Integer[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(array1,new Integer[0]);
-        Assertions.assertArrayEquals(expected,resultOfTheMethod);
+        int[] expected = {};
+        int[] resultOfTheMethod = arraysUtil.getTheCommonNumbers(array1, new int[0]);
+        Assertions.assertArrayEquals(expected, resultOfTheMethod);
     }
 
     @Test
     void getTheCommonNumbersIfFirstArrayForCheckIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> arraysUtil.getTheCommonNumbers(null,array2));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> arraysUtil.getTheCommonNumbers(null, array2));
     }
 
     @Test
@@ -43,15 +43,15 @@ class ArraysUtilTest {
     }
 
     @Test
-    void deleteRepeatedElements(){
-        int[] array = {1,5,8,7,9,6,1,5,9,3};
+    void deleteRepeatedElements() {
+        int[] array = {1, 5, 8, 7, 9, 6, 1, 5, 9, 3};
         int[] expected = {1, 5, 8, 7, 9, 6, 3};
-        Integer[] resultOfMethodsWork = arraysUtil.deleteRepeatedElements(array);
-        Assertions.assertArrayEquals(Arrays.stream(expected).boxed().toArray(), resultOfMethodsWork);
+        int[] resultOfMethodsWork = arraysUtil.deleteRepeatedElements(array);
+        Assertions.assertArrayEquals(expected, resultOfMethodsWork);
     }
 
     @Test
-    void deleteRepeatedElementsWithTheNullInputArray(){
+    void deleteRepeatedElementsWithTheNullInputArray() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> arraysUtil.deleteRepeatedElements(null));
     }
 }
