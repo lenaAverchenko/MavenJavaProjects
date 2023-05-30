@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Race {
+
     private List<Horse> horses;
     private Hippodrome hippodrome;
     private int initialDistance = 0;
@@ -50,7 +51,7 @@ public class Race {
         this.resultMap = resultMap;
     }
 
-    public int startRace() {
+    public long startRace() {
         List<Thread> threads = horses.stream().map(Thread::new).toList();
         threads.forEach(Thread::start);
         return threads.size();

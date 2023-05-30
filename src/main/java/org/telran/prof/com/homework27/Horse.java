@@ -3,6 +3,7 @@ package org.telran.prof.com.homework27;
 import java.util.Random;
 
 public class Horse implements Runnable {
+
     private String name;
     private double step;
     private Race race;
@@ -36,13 +37,11 @@ public class Horse implements Runnable {
     }
 
     public void run() {
-        if (passedLength >= race.getHippodrome().getLength()) {
-            long end = System.currentTimeMillis();
-            race.getResultMap().put(new Horse(name), end);
-        }
         while (passedLength < race.getHippodrome().getLength()) {
             passedLength = passedLength + step;
-            run();
+        }
+        if (passedLength >= race.getHippodrome().getLength()) {
+            race.getResultMap().put(new Horse(name), System.currentTimeMillis());
         }
     }
 

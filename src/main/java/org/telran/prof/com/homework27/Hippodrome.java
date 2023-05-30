@@ -1,6 +1,7 @@
 package org.telran.prof.com.homework27;
 
 public class Hippodrome {
+
     private double length;
     private int treadmill;
 

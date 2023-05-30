@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RaceApp {
-    public static void main(String[] args) {
-        Hippodrome hippodrome = new Hippodrome(1000, 10);
+
+    public static void main(String[] args) throws InterruptedException {
+        Hippodrome hippodrome = new Hippodrome(100, 10);
         Horse horse1 = new Horse("Bethany");
         Horse horse2 = new Horse("Ken");
         Horse horse3 = new Horse("Bruno");
@@ -20,12 +21,9 @@ public class RaceApp {
         Race race = new Race(horses, hippodrome);
         horses.stream().forEach(h -> h.setRace(race));
 
-        //Вариант через стрим, и можно не создавать каждую лошадь отдельно
         ResultPrinter resultPrinter = new ResultPrinter(race);
-        Thread threatOfResults = new Thread(resultPrinter);
-        threatOfResults.start();
+        Thread threadOfResults = new Thread(resultPrinter);
+        threadOfResults.start();
         race.startRace();
-
-
     }
 }
