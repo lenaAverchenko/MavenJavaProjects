@@ -1,0 +1,88 @@
+A
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Berlin', destination='Warsaw', hours='05:00', price=299.99, startDate='2023-05-22', returnDate='2023-05-28'}
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+Trip{source='Vienna', destination='Gdansk', hours='12:00', price=500.0, startDate='2023-02-15', returnDate='2023-02-20'}
+Trip{source='Gdansk', destination='Praha', hours='09:45', price=425.0, startDate='2023-05-23', returnDate='2023-06-01'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+Trip{source='Wroclaw', destination='Praha', hours='15:00', price=250.0, startDate='2023-10-19', returnDate='2023-10-23'}
+Trip{source='London', destination='Wroclaw', hours='22:50', price=789.99, startDate='2023-12-05', returnDate='2023-12-30'}
+Trip{source='Toronto', destination='Frankfurt', hours='13:00', price=1250.0, startDate='2023-09-08', returnDate='2023-09-25'}
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+Trip{source='Frankfurt', destination='Wroclaw', hours='18:00', price=700.8, startDate='2023-06-08', returnDate='2023-06-27'}
+B
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Wroclaw', destination='Praha', hours='15:00', price=250.0, startDate='2023-10-19', returnDate='2023-10-23'}
+Trip{source='Berlin', destination='Warsaw', hours='05:00', price=299.99, startDate='2023-05-22', returnDate='2023-05-28'}
+Trip{source='Gdansk', destination='Praha', hours='09:45', price=425.0, startDate='2023-05-23', returnDate='2023-06-01'}
+Trip{source='Vienna', destination='Gdansk', hours='12:00', price=500.0, startDate='2023-02-15', returnDate='2023-02-20'}
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+Trip{source='Frankfurt', destination='Wroclaw', hours='18:00', price=700.8, startDate='2023-06-08', returnDate='2023-06-27'}
+Trip{source='London', destination='Wroclaw', hours='22:50', price=789.99, startDate='2023-12-05', returnDate='2023-12-30'}
+Trip{source='Toronto', destination='Frankfurt', hours='13:00', price=1250.0, startDate='2023-09-08', returnDate='2023-09-25'}
+C
+Trip{source='Toronto', destination='Frankfurt', hours='13:00', price=1250.0, startDate='2023-09-08', returnDate='2023-09-25'}
+Trip{source='London', destination='Wroclaw', hours='22:50', price=789.99, startDate='2023-12-05', returnDate='2023-12-30'}
+Trip{source='Frankfurt', destination='Wroclaw', hours='18:00', price=700.8, startDate='2023-06-08', returnDate='2023-06-27'}
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+Trip{source='Vienna', destination='Gdansk', hours='12:00', price=500.0, startDate='2023-02-15', returnDate='2023-02-20'}
+Trip{source='Gdansk', destination='Praha', hours='09:45', price=425.0, startDate='2023-05-23', returnDate='2023-06-01'}
+Trip{source='Berlin', destination='Warsaw', hours='05:00', price=299.99, startDate='2023-05-22', returnDate='2023-05-28'}
+Trip{source='Wroclaw', destination='Praha', hours='15:00', price=250.0, startDate='2023-10-19', returnDate='2023-10-23'}
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+D
+Please, enter the minimum price for your trip in '00,00' or '000' format: 
+10.0
+Please, enter the minimum price for your trip in '00,00' or '000' format: 
+100.0
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+E
+Please, enter the city to begin your trip with. You can pick one of the following: [Berlin, Luban, Vienna, Gdansk, Wroclaw, London, Toronto, Praha, Frankfurt]
+Luban
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+F
+Please, enter the city to begin your trip. You can pick one of the following: 
+[Gdansk, Warsaw, Wroclaw, Praha, Drezden, Frankfurt, Vienna]
+Vienna
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+G
+The amount of available trips is 11. 
+The prices are in the range from 20.5 to 1250.0
+Starting from following cities: [Berlin, Luban, Vienna, Gdansk, Wroclaw, London, Toronto, Praha, Frankfurt]
+to the following cities: [Gdansk, Warsaw, Wroclaw, Praha, Drezden, Frankfurt, Vienna]
+
+H
+Please, enter the date of leaving (yyyy-mm-dd)
+2023-01-01
+Please, enter the date of departure (yyyy-mm-dd)
+2023-05-01
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Vienna', destination='Gdansk', hours='12:00', price=500.0, startDate='2023-02-15', returnDate='2023-02-20'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+I
+Please, enter the date of leaving (yyyy-mm-dd)
+2023-03-01
+Please, enter the radius of days: 
+60
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Vienna', destination='Gdansk', hours='12:00', price=500.0, startDate='2023-02-15', returnDate='2023-02-20'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+Trip{source='Praha', destination='Vienna', hours='08:00', price=510.0, startDate='2023-01-01', returnDate='2023-01-24'}
+J
+Please, enter the date of departure (yyyy-mm-dd)
+2023-05-03
+Please, enter the radius of days: 
+60
+Trip{source='Berlin', destination='Gdansk', hours='06:30', price=123.55, startDate='2023-04-12', returnDate='2023-04-15'}
+Trip{source='Berlin', destination='Warsaw', hours='05:00', price=299.99, startDate='2023-05-22', returnDate='2023-05-28'}
+Trip{source='Luban', destination='Wroclaw', hours='04:15', price=50.45, startDate='2023-06-17', returnDate='2023-06-29'}
+Trip{source='Gdansk', destination='Praha', hours='09:45', price=425.0, startDate='2023-05-23', returnDate='2023-06-01'}
+Trip{source='Berlin', destination='Drezden', hours='00:20', price=20.5, startDate='2023-04-23', returnDate='2023-04-26'}
+Trip{source='Frankfurt', destination='Wroclaw', hours='18:00', price=700.8, startDate='2023-06-08', returnDate='2023-06-27'}
+Q

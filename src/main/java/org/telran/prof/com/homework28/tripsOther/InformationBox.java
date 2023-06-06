@@ -2,7 +2,6 @@ package org.telran.prof.com.homework28.tripsOther;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +23,7 @@ public class InformationBox {
     private Logger logger;
 
     private Queue<String> bufferedQueue = new ArrayDeque<>();
+    private SystemIODecoratorImpl systemIODecorator;
     private List<Trip> currentTrips;
 
     public Scanner getScanner() {
@@ -43,9 +43,6 @@ public class InformationBox {
         this.trips = trips;
     }
 
-    public void setScanner(Scanner scan) {
-        this.scanner = scan;
-    }
 
     @Override
     public String toString() {
@@ -71,6 +68,7 @@ public class InformationBox {
                 .mapToDouble(Trip::getPrice)
                 .max().orElse(0.0);
         scanner = new Scanner(System.in);
+        systemIODecorator = new SystemIODecoratorImpl(new Scanner(System.in), bufferedQueue);
     }
 
 
@@ -80,6 +78,15 @@ public class InformationBox {
 
     public void setBufferedQueue(Queue<String> bufferedQueue) {
         this.bufferedQueue = bufferedQueue;
+    }
+
+
+    public SystemIODecoratorImpl getSystemIODecorator() {
+        return systemIODecorator;
+    }
+
+    public void setSystemIODecorator(SystemIODecoratorImpl systemIODecorator) {
+        this.systemIODecorator = systemIODecorator;
     }
 
     public void run() throws InterruptedException {
@@ -95,103 +102,87 @@ public class InformationBox {
         thread.start();
         while (!"Q".equals(command)) {
             System.out.println("Pick the command: 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'Q'");
-            command = scanner.next();
-            bufferedQueue.add(command + "\n");
+            command = systemIODecorator.nextLine();
             switch (command) {
                 case "A":
                     currentTrips = trips.stream().collect(Collectors.toList());
-                    currentTrips.forEach(System.out::println);
+                    currentTrips.forEach(tr -> systemIODecorator.println(tr));
                     break;
                 case "B":
                     currentTrips = trips.stream().sorted(Comparator.comparingDouble(Trip::getPrice)).collect(Collectors.toList());
-                    currentTrips.forEach(System.out::println);
+                    currentTrips.forEach(tr -> systemIODecorator.println(tr));
                     break;
                 case "C":
                     currentTrips = trips.stream().sorted(Comparator.comparingDouble(Trip::getPrice).reversed()).collect(Collectors.toList());
-                    currentTrips.forEach(System.out::println);
+                    currentTrips.forEach(tr -> systemIODecorator.println(tr));
                     break;
                 case "D":
                     double askedMinPrice = 0;
                     double askedMaxPrice = 0;
                     try {
-                        String askedMin = "Please, enter the minimum price for your trip in '00,00' or '000' format: ";
-                        System.out.println(askedMin);
-                        bufferedQueue.add(askedMin);
-                        askedMinPrice = scanner.nextDouble();
-                        bufferedQueue.add(Double.toString(askedMinPrice));
-                        String askedMax = "Please, enter the maximum price for your trip in '00,00' or '000' format: ";
-                        System.out.println(askedMax);
-                        bufferedQueue.add(askedMax);
-                        askedMaxPrice = scanner.nextDouble();
-                        bufferedQueue.add(Double.toString(askedMaxPrice));
+                        systemIODecorator.println("Please, enter the minimum price for your trip in '00,00' or '000' format: ");
+                        askedMinPrice = systemIODecorator.nextDouble();
+                        systemIODecorator.println("Please, enter the minimum price for your trip in '00,00' or '000' format: ");
+                        askedMaxPrice = systemIODecorator.nextDouble();
                     } catch (Exception e) {
-                        System.out.println("Wrong format of the price");
-                        bufferedQueue.add("Wrong format of the price");
+                        systemIODecorator.println("Wrong format of the price");
                     }
                     double finalAskedMinPrice = askedMinPrice;
                     double finalAskedMaxPrice = askedMaxPrice;
                     currentTrips = getTripFromRange(finalAskedMinPrice, finalAskedMaxPrice);
                     if (currentTrips.isEmpty()) {
-                        bufferedQueue.add("There are no results for your request!\n");
-                        System.out.println("There are no results for your request!");
+                        systemIODecorator.println("There are no results for your request!");
                     } else {
-                        currentTrips.forEach(System.out::println);
+                        currentTrips.forEach(tr -> systemIODecorator.println(tr));
                     }
                     break;
                 case "E":
-                    System.out.println("Please, enter the city to begin your trip with. You can pick one of the following:");
-                    bufferedQueue.add("Please, enter the city to begin your trip with. You can pick one of the following:" +
-                            sourceCities.stream().toList());
-                    sourceCities.forEach(System.out::println);
+                    systemIODecorator.println("Please, enter the city to begin your trip with. You can pick one of the following: \n"
+                            + sourceCities.stream().toList());
                     currentTrips = getTripBySource(sourceCities).stream().collect(Collectors.toList());
-                    currentTrips.forEach(System.out::println);
+                    currentTrips.forEach(trip -> systemIODecorator.println(trip));
                     break;
                 case "F":
-                    System.out.println("Please, enter the city to begin your trip. You can pick one of the following:");
-                    destinationCities.forEach(System.out::println);
+                    systemIODecorator.println("Please, enter the city to begin your trip. You can pick one of the following: \n"
+                            + destinationCities.stream().toList());
                     currentTrips = getTripByDestination(destinationCities).stream().collect(Collectors.toList());
-                    currentTrips.forEach(System.out::println);
+                    currentTrips.forEach(trip -> systemIODecorator.println(trip));
                     break;
                 case "G":
-                    String str = "The amount of available trips is " + trips.size() + ". \nThe prices are in the range from " + minPrice + " to " + maxPrice +
-                            "\nStarting from following cities: " + sourceCities + "\nto the following cities: " + destinationCities + "\n";
-                    bufferedQueue.add(str + "\n");
-                    System.out.printf(str);
+                    systemIODecorator.println("The amount of available trips is " + trips.size() + ". \nThe prices are in the range from " + minPrice + " to " + maxPrice +
+                            "\nStarting from following cities: " + sourceCities + "\nto the following cities: " + destinationCities + "\n");
                     break;
                 case "H":
                     currentTrips = getTripByDateRange();
-                    System.out.println(currentTrips);
+                    currentTrips.forEach(trip -> systemIODecorator.println(trip));
                     break;
                 case "I":
                     currentTrips = getTripByStartDateRangeInRadius();
-                    System.out.println(currentTrips);
+                    currentTrips.forEach(trip -> systemIODecorator.println(trip));
                     break;
                 case "J":
                     currentTrips = getTripByEndDateRangeInRadius();
-                    System.out.println(currentTrips);
+                    currentTrips.forEach(trip -> systemIODecorator.println(trip));
                     break;
                 case "Q":
                     bufferedQueue.add("Q\n");
-                    scanner.close();
+                    systemIODecorator.getScanner().close();
                     thread.interrupt();
                     break;
                 default:
                     System.out.println("This command doesn't exist! Please, try again!");
+                    systemIODecorator.println("This command doesn't exist! Please, try again!");
                     continue;
             }
-            bufferedQueue.add(currentTrips.toString() + "\n");
         }
     }
 
     public List<Trip> getTripByDestination(List<String> destinationCities) {
-        String city = scanner.next();
-        bufferedQueue.add("Picked city: " + city + "\n");
+        String city = systemIODecorator.nextLine();
         while (!destinationCities.contains(city)) {
-            System.out.println("Pick the one of the following cities:\n");
-            destinationCities.forEach(System.out::println);
             bufferedQueue.add("Pick the one of the following cities: \n" + destinationCities.stream().toList());
-            city = scanner.next();
-            bufferedQueue.add("Picked city: " + city + "\n");
+            systemIODecorator.println("Pick the one of the following cities:\n" + destinationCities.stream().toList());
+            city = systemIODecorator.nextLine();
         }
         String finalCity = city;
         return trips.stream()
@@ -199,14 +190,10 @@ public class InformationBox {
     }
 
     public List<Trip> getTripBySource(List<String> sourceCities) {
-        String city = scanner.next();
-        bufferedQueue.add("Picked city: " + city + "\n");
+        String city = systemIODecorator.nextLine();
         while (!sourceCities.contains(city)) {
-            System.out.println("Pick the one of the following cities:");
-            bufferedQueue.add("Pick the one of the following cities: " + sourceCities.stream().toList() + "\n");
-            sourceCities.forEach(System.out::println);
-            city = scanner.next();
-            bufferedQueue.add("Picked city: " + city + "\n");
+            systemIODecorator.println("Pick the one of the following cities: " + sourceCities.stream().toList());
+            city = systemIODecorator.nextLine();
         }
         String finalCity = city;
         return trips.stream()
@@ -223,18 +210,12 @@ public class InformationBox {
         LocalDate leaving = LocalDate.now();
         LocalDate departure = LocalDate.now();
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println("Please, enter the date of leaving (yyyy-mm-dd)");
-            bufferedQueue.add("Please, enter the date of leaving (yyyy-mm-dd)" + "\n");
-            leaving = LocalDate.parse(scanner.next(), formatter);
-            bufferedQueue.add(leaving.toString() + "\n");
-            System.out.println("Please, enter the date of departure (yyyy-mm-dd)");
-            bufferedQueue.add("Please, enter the date of departure (yyyy-mm-dd)" + "\n");
-            departure = LocalDate.parse(scanner.next(), formatter);
-            bufferedQueue.add(departure.toString() + "\n");
+            systemIODecorator.println("Please, enter the date of leaving (yyyy-mm-dd)");
+            leaving = systemIODecorator.nextLineParseToDateFormat();
+            systemIODecorator.println("Please, enter the date of departure (yyyy-mm-dd)");
+            departure = systemIODecorator.nextLineParseToDateFormat();
         } catch (DateTimeParseException e) {
-            System.out.println("The wrong date format. Try again!");
-            bufferedQueue.add("The wrong date format. Try again!" + "\n");
+            systemIODecorator.println("The wrong date format. Try again!");
             getTripByDateRange();
         }
         LocalDate finalLeaving = leaving;
@@ -249,19 +230,13 @@ public class InformationBox {
         int radius = 0;
 
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println("Please, enter the date of leaving (yyyy-mm-dd)");
-            bufferedQueue.add("Please, enter the date of leaving (yyyy-mm-dd)" + "\n");
-            leaving = LocalDate.parse(scanner.next(), formatter);
-            bufferedQueue.add(leaving.toString() + "\n");
-            System.out.println("Please, enter the radius of days: ");
-            bufferedQueue.add("Please, enter the radius of days: " + "\n");
-            radius = scanner.nextInt();
-            bufferedQueue.add(Integer.toString(radius) + "\n");
+            systemIODecorator.println("Please, enter the date of leaving (yyyy-mm-dd)");
+            leaving = systemIODecorator.nextLineParseToDateFormat();
+            systemIODecorator.println("Please, enter the radius of days: ");
+            radius = systemIODecorator.nextInt();
 
         } catch (DateTimeParseException e) {
-            System.out.println("The wrong date format. Try again!");
-            bufferedQueue.add("The wrong date format. Try again!" + "\n");
+            systemIODecorator.println("The wrong date format. Try again!");
             getTripByStartDateRangeInRadius();
         }
         LocalDate finalLeaving = leaving;
@@ -277,23 +252,16 @@ public class InformationBox {
         int radius = 0;
 
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println("Please, enter the date of departure (yyyy-mm-dd)");
-            bufferedQueue.add("Please, enter the date of departure (yyyy-mm-dd)" + "\n");
-            departure = LocalDate.parse(scanner.next(), formatter);
-            bufferedQueue.add(departure.toString() + "\n");
-            System.out.println("Please, enter the radius of days: ");
-            bufferedQueue.add("Please, enter the radius of days: " + "\n");
-            radius = scanner.nextInt();
-            bufferedQueue.add(Integer.toString(radius) + "\n");
+            systemIODecorator.println("Please, enter the date of departure (yyyy-mm-dd)");
+            departure = systemIODecorator.nextLineParseToDateFormat();
+            systemIODecorator.println("Please, enter the radius of days: ");
+            radius = systemIODecorator.nextInt();
 
         } catch (DateTimeParseException e) {
-            System.out.println("The wrong date format. Try again!");
-            bufferedQueue.add("The wrong date format. Try again!" + "\n");
+            systemIODecorator.println("The wrong date format. Try again!");
             getTripByEndDateRangeInRadius();
         }
         LocalDate finalDepartureString = departure;
-
         int finalRadius = radius;
         return trips.stream()
                 .filter(tr -> tr.getReturnDate().compareTo(finalDepartureString.plusDays(finalRadius)) <= 0)

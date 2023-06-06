@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class Logger implements Runnable {
@@ -11,6 +12,7 @@ public class Logger implements Runnable {
     private File file;
     private String path;
     private BufferedWriter bufferedWriter;
+
 
     private InformationBox informationBox;
 
@@ -32,7 +34,7 @@ public class Logger implements Runnable {
         file = new File(path);
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                Thread.currentThread().sleep(1000);
+                Thread.currentThread().sleep(2000);
                 while (!informationBox.getBufferedQueue().isEmpty()) {
                     try {
                         bufferedWriter.write(informationBox.getBufferedQueue().poll());
