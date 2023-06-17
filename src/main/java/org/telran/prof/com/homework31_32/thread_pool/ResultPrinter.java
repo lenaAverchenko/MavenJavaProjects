@@ -1,8 +1,9 @@
-package org.telran.prof.com.homework27;
+package org.telran.prof.com.homework31_32.thread_pool;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
-public class ResultPrinter implements Runnable {
+public class ResultPrinter implements Callable<List<String>> {
 
     private Race race;
 
@@ -22,7 +23,7 @@ public class ResultPrinter implements Runnable {
     }
 
     @Override
-    public void run() {
+    public List<String> call() throws Exception {
         while (race.getResultMap().size() < 10) {
             try {
                 Thread.sleep(3000);
@@ -30,8 +31,9 @@ public class ResultPrinter implements Runnable {
                 throw new RuntimeException(e);
             }
         }
-        race.getResultMap().entrySet().stream()
+        return race.getResultMap().entrySet().stream()
                 .sorted(Comparator.comparingLong(Map.Entry::getValue))
-                .forEach((horse) -> System.out.println("The horse " + horse.getKey().getName() + " finished: " + new Date(horse.getValue()) + " in millis: " + horse.getValue()));
+                .map((horse) -> ("The horse " + horse.getKey().getName() + " finished: " + new Date(horse.getValue()) + " in millis: " + horse.getValue()))
+                .toList();
     }
 }
