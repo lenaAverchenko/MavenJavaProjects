@@ -1,12 +1,11 @@
-package org.telran.prof.com.classwork33;
+package org.telran.prof.com.homework33;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CoffeeApp {
-
+public class TeaApp {
     public static void main(String[] args) {
-        SpringApplication.run(CoffeeApp.class, args);
+        SpringApplication.run(TeaApp.class, args);
     }
 }

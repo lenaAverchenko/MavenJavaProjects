@@ -4,7 +4,6 @@ import java.util.UUID;
 
 public class Coffee {
     private String uuid;
-
     private  String name;
 
     public Coffee(String name) {
